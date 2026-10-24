@@ -1,0 +1,76 @@
+@model Expense_Tracker.Models.User
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="row justify-content-center py-4">
+    <div class="col-md-6 col-lg-5">
+        <div class="card card-custom p-4 p-md-5">
+            <div class="text-center mb-4">
+                <div class="d-inline-flex p-3 rounded-circle bg-success-subtle text-success mb-3">
+                    <i class="bi bi-person-plus-fill fs-2"></i>
+                </div>
+                <h3 class="fw-bold">Create Account</h3>
+                <p class="text-muted">Take full control over your budget and expenses</p>
+            </div>
+
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger py-2 small" })
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.FullName, new { @class = "form-label fw-semibold" })
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = "e.g. Rahul Sharma" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Email, new { @class = "form-label fw-semibold" })
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="bi bi-envelope"></i></span>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "user@example.com" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Password, new { @class = "form-label fw-semibold" })
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Create secure password" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.MonthlyIncome, new { @class = "form-label fw-semibold" })
+                    <div class="input-group">
+                        <span class="input-group-text bg-light">₹</span>
+                        @Html.TextBoxFor(m => m.MonthlyIncome, new { @class = "form-control", type = "number", step = "100", placeholder = "50000" })
+                    </div>
+                    <small class="text-muted">Used to calculate monthly budget health & savings rates.</small>
+                    @Html.ValidationMessageFor(m => m.MonthlyIncome, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary-custom py-2">
+                        <i class="bi bi-check-circle me-1"></i> Complete Registration
+                    </button>
+                </div>
+            }
+
+            <div class="text-center mt-4 text-muted small">
+                Already registered? 
+                <a href="@Url.Action("Login", "Account")" class="text-primary fw-bold text-decoration-none">Sign In</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

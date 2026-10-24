@@ -1,0 +1,60 @@
+@{
+    ViewBag.Title = "ASP.NET & .NET Subject Architecture";
+}
+
+<div class="py-4">
+    <div class="text-center mb-5">
+        <span class="badge bg-info-subtle text-info fw-bold px-3 py-2 rounded-pill mb-2">Subject Concepts Implementation</span>
+        <h2 class="fw-bold">ASP.NET & .NET Technology Stack</h2>
+        <p class="text-muted">How this project maps core syllabus concepts of ASP.NET and C# programming</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card card-custom p-4 h-100">
+                <h5 class="fw-bold text-primary mb-3"><i class="bi bi-layers-fill me-2"></i>1. MVC Architecture Pattern</h5>
+                <ul class="text-muted small">
+                    <li class="mb-2"><strong>Model:</strong> Strongly typed C# classes with Data Annotations (<code>[Required]</code>, <code>[Range]</code>, <code>[StringLength]</code>, <code>[EmailAddress]</code>).</li>
+                    <li class="mb-2"><strong>View:</strong> Razor syntax engine (<code>.cshtml</code>), HTML Helpers (<code>@Html.BeginForm</code>, <code>@Html.TextBoxFor</code>, <code>@Html.DropDownListFor</code>), partial rendering, and Layout master pages.</li>
+                    <li class="mb-2"><strong>Controller:</strong> Separation of HTTP GET and POST verbs, <code>[ValidateAntiForgeryToken]</code> protection, action filters, and <code>ModelState.IsValid</code> validations.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card card-custom p-4 h-100">
+                <h5 class="fw-bold text-success mb-3"><i class="bi bi-database me-2"></i>2. ADO.NET & SQL Server Connection</h5>
+                <ul class="text-muted small">
+                    <li class="mb-2"><strong>Connection String:</strong> Managed centrally in <code>Web.config</code> using <code>ConfigurationManager.ConnectionStrings</code>.</li>
+                    <li class="mb-2"><strong>Core Objects:</strong> <code>SqlConnection</code>, <code>SqlCommand</code>, <code>SqlDataAdapter</code>, <code>DataTable</code>, and <code>SqlParameter</code>.</li>
+                    <li class="mb-2"><strong>Resource Management:</strong> Strict usage of C# <code>using (...)</code> statements for deterministic <code>IDisposable</code> cleanup and SQL connection pooling.</li>
+                    <li class="mb-2"><strong>SQL Injection Prevention:</strong> 100% parameterized SQL queries preventing any SQL injection exploits.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card card-custom p-4 h-100">
+                <h5 class="fw-bold text-info mb-3"><i class="bi bi-shield-check me-2"></i>3. State Management & Security</h5>
+                <ul class="text-muted small">
+                    <li class="mb-2"><strong>Session State:</strong> Secure server-side user session management (<code>Session["CurrentUser"]</code>) with custom <code>[AuthorizeUser]</code> action filter.</li>
+                    <li class="mb-2"><strong>TempData:</strong> Short-lived redirect flash messaging across HTTP requests (e.g., success alerts on delete, create, update).</li>
+                    <li class="mb-2"><strong>ViewBag:</strong> Passing dynamic UI metadata (categories dropdown, active periods, totals) from Controller to Razor Views.</li>
+                    <li class="mb-2"><strong>CSRF Protection:</strong> ASP.NET Anti-Forgery tokens embedded in all mutable form submissions.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card card-custom p-4 h-100">
+                <h5 class="fw-bold text-warning mb-3"><i class="bi bi-cpu-fill me-2"></i>4. Smart Financial Algorithms</h5>
+                <ul class="text-muted small">
+                    <li class="mb-2"><strong>Aggregations:</strong> SQL Server <code>SUM</code>, <code>GROUP BY</code>, and monthly date formatting.</li>
+                    <li class="mb-2"><strong>Threshold Warnings:</strong> Algorithmic alerts triggered when category spending reaches ≥85% or >100% of defined monthly limits.</li>
+                    <li class="mb-2"><strong>Savings Rate Analytics:</strong> Dynamic savings rate benchmarking comparing declared monthly income against aggregate expenditures.</li>
+                    <li class="mb-2"><strong>CSV Data Export:</strong> Pure .NET streaming of byte data directly using <code>File(buffer, "text/csv")</code>.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

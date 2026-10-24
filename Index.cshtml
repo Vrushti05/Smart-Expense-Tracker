@@ -1,0 +1,165 @@
+@{
+    ViewBag.Title = "Smart Expense Tracker - Personal Financial Intelligence";
+}
+
+<!-- Hero Section with Modern Visual Aesthetics -->
+<div class="py-5 position-relative">
+    <div class="row align-items-center gy-5">
+        <div class="col-lg-7 text-center text-lg-start">
+            <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.25);">
+                <span class="badge rounded-pill bg-primary px-2 py-1">New</span>
+                <span class="small fw-semibold text-primary"><i class="bi bi-stars me-1"></i>Automated Financial Insights & Budget Alerts</span>
+            </div>
+
+            <h1 class="display-3 fw-bold tracking-tight mb-3" style="letter-spacing: -1.5px; line-height: 1.15;">
+                Take Total Control of Your Money with 
+                <span style="background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Smart Expense
+                </span>
+            </h1>
+
+            <p class="lead text-muted mb-4 pe-lg-4" style="font-size: 1.15rem; line-height: 1.6;">
+                An intelligent expense management platform engineered with precision. Gain crystal-clear clarity over where your income goes, safeguard monthly budget caps, and receive real-time financial health alerts.
+            </p>
+
+            <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start mb-4">
+                <a href="@Url.Action("Login", "Account")" class="btn btn-primary-custom btn-lg px-4 py-3 fs-6">
+                    <i class="bi bi-rocket-takeoff-fill"></i> Launch Live Dashboard
+                </a>
+                <a href="@Url.Action("Register", "Account")" class="btn btn-outline-dark btn-lg px-4 py-3 fs-6 rounded-3">
+                    <i class="bi bi-person-plus-fill me-1"></i> Create Free Account
+                </a>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-4 text-muted small pt-2">
+                <div><i class="bi bi-shield-check text-success me-1"></i> SQL Database Attached</div>
+                <div><i class="bi bi-file-earmark-spreadsheet text-info me-1"></i> CSV Instant Export</div>
+                <div><i class="bi bi-bell text-warning me-1"></i> Smart Alerts</div>
+            </div>
+        </div>
+
+        <!-- Interactive Mockup Card -->
+        <div class="col-lg-5">
+            <div class="card card-custom p-4 shadow-lg position-relative" style="background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); border: 1px solid #e2e8f0;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-circle bg-danger" style="width: 10px; height: 10px;"></div>
+                        <div class="rounded-circle bg-warning" style="width: 10px; height: 10px;"></div>
+                        <div class="rounded-circle bg-success" style="width: 10px; height: 10px;"></div>
+                        <span class="small text-muted ms-2 fw-semibold">Live Finance Preview</span>
+                    </div>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Active Month</span>
+                </div>
+
+                <!-- Mini Stat Overview -->
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <div class="p-3 rounded-4 bg-light">
+                            <span class="text-muted small d-block">Monthly Income</span>
+                            <span class="fw-bold fs-5 text-success">₹50,000.00</span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 rounded-4 bg-light">
+                            <span class="text-muted small d-block">Total Spent</span>
+                            <span class="fw-bold fs-5 text-danger">₹14,500.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mini Progress Preview -->
+                <div class="p-3 rounded-4 mb-3" style="background: #f1f5f9;">
+                    <div class="d-flex justify-content-between small fw-semibold mb-1">
+                        <span>Groceries & Supermarket</span>
+                        <span class="text-primary">61% Used</span>
+                    </div>
+                    <div class="progress" style="height: 8px;">
+                        <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" style="width: 61%"></div>
+                    </div>
+                </div>
+
+                <!-- Mini Alert Mockup -->
+                <div class="alert alert-warning d-flex align-items-center gap-2 py-2 px-3 rounded-3 small mb-0 border-0">
+                    <i class="bi bi-lightning-charge-fill text-warning fs-5"></i>
+                    <div><strong>Smart Tip:</strong> You are saving <strong>71.0%</strong> of income this month!</div>
+                </div>
+
+                <div class="text-center mt-3">
+                    <a href="@Url.Action("Login", "Account")" class="text-primary text-decoration-none small fw-bold">
+                        Try Demo Login (Email: john@example.com) <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Feature Section -->
+<div class="py-5 border-top border-bottom" style="background: #ffffff; margin: 0 -100vw; padding: 4rem 100vw;">
+    <div class="text-center mb-5">
+        <span class="badge bg-primary-subtle text-primary fw-bold px-3 py-2 rounded-pill mb-2">Designed For Everyday Clarity</span>
+        <h2 class="fw-bold">Everything You Need to Master Your Budget</h2>
+        <p class="text-muted mx-auto" style="max-width: 600px;">
+            Sophisticated personal expense tracking made effortlessly simple, intuitive, and visually engaging.
+        </p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card card-custom p-4 h-100">
+                <div class="stat-icon-bubble mb-3" style="background: linear-gradient(135deg, #4f46e5, #6366f1);">
+                    <i class="bi bi-pie-chart-fill"></i>
+                </div>
+                <h5 class="fw-bold mb-2">Interactive Visual Charts</h5>
+                <p class="text-muted small mb-0">
+                    Dynamic donut charts categorizing spending patterns alongside historical monthly bar trends to pinpoint where your money flows.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-custom p-4 h-100">
+                <div class="stat-icon-bubble mb-3" style="background: linear-gradient(135deg, #059669, #10b981);">
+                    <i class="bi bi-bullseye"></i>
+                </div>
+                <h5 class="fw-bold mb-2">Category Monthly Budgets</h5>
+                <p class="text-muted small mb-0">
+                    Establish spending limits for individual categories. Visual color-coded progress bars change dynamically as you approach or breach thresholds.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-custom p-4 h-100">
+                <div class="stat-icon-bubble mb-3" style="background: linear-gradient(135deg, #0284c7, #06b6d4);">
+                    <i class="bi bi-cpu-fill"></i>
+                </div>
+                <h5 class="fw-bold mb-2">Smart Insights Engine</h5>
+                <p class="text-muted small mb-0">
+                    Automated financial analysis evaluating your savings rate, detecting budget deficit risks, and warning you of high spending concentration.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Banner -->
+<div class="py-5 text-center">
+    <div class="p-5 rounded-4 text-white shadow-lg position-relative overflow-hidden" 
+         style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);">
+        <div class="position-relative" style="z-index: 2;">
+            <h2 class="fw-bold mb-3">Ready to organize your finances like a pro?</h2>
+            <p class="text-white-50 mx-auto mb-4" style="max-width: 650px;">
+                Log transactions, review monthly breakdown, and export CSV audit reports in seconds.
+            </p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="@Url.Action("Login", "Account")" class="btn btn-light btn-lg px-4 py-2 fw-bold text-primary rounded-3">
+                    Sign In Now
+                </a>
+                <a href="@Url.Action("About", "Home")" class="btn btn-outline-light btn-lg px-4 py-2 rounded-3">
+                    Explore .NET Architecture
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

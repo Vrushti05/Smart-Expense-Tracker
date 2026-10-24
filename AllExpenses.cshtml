@@ -1,0 +1,134 @@
+@model IEnumerable<Expense_Tracker.Models.Expense>
+@{
+    ViewBag.Title = "Global Transaction Audit - Admin";
+}
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <div class="d-flex align-items-center gap-2">
+            <a href="@Url.Action("Index", "Admin")" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <h2 class="fw-bold mb-0">System Transaction Audit</h2>
+        </div>
+        <p class="text-muted mb-0 small">Audit, inspect, and moderate all user expenditures across the platform</p>
+    </div>
+    <div>
+        <span class="badge bg-light text-dark border px-3 py-2 fs-6">
+            Filtered Volume: <strong class="text-danger">₹@ViewBag.TotalVolume.ToString("N2")</strong>
+        </span>
+    </div>
+</div>
+
+<!-- Admin Filter Bar -->
+<div class="card card-custom p-3 mb-4">
+    @using (Html.BeginForm("AllExpenses", "Admin", FormMethod.Get, new { @class = "row g-2 align-items-end" }))
+    {
+        <div class="col-md-3">
+            <label class="form-label small fw-semibold text-muted">User Account</label>
+            @Html.DropDownList("userId", (SelectList)ViewBag.Users, "All Users", new { @class = "form-select form-select-sm" })
+        </div>
+        <div class="col-md-2">
+            <label class="form-label small fw-semibold text-muted">Category</label>
+            @Html.DropDownList("categoryId", (SelectList)ViewBag.Categories, "All Categories", new { @class = "form-select form-select-sm" })
+        </div>
+        <div class="col-md-2">
+            <label class="form-label small fw-semibold text-muted">Payment Method</label>
+            <select name="paymentMethod" class="form-select form-select-sm">
+                <option value="">All Methods</option>
+                <option value="Cash" @(ViewBag.SelectedPaymentMethod == "Cash" ? "selected" : "")>Cash</option>
+                <option value="Credit Card" @(ViewBag.SelectedPaymentMethod == "Credit Card" ? "selected" : "")>Credit Card</option>
+                <option value="Debit Card" @(ViewBag.SelectedPaymentMethod == "Debit Card" ? "selected" : "")>Debit Card</option>
+                <option value="UPI" @(ViewBag.SelectedPaymentMethod == "UPI" ? "selected" : "")>UPI</option>
+                <option value="Net Banking" @(ViewBag.SelectedPaymentMethod == "Net Banking" ? "selected" : "")>Net Banking</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label small fw-semibold text-muted">Date From</label>
+            <input type="date" name="startDate" value="@ViewBag.StartDate" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label small fw-semibold text-muted">Search Keyword</label>
+            <input type="text" name="search" value="@ViewBag.SearchTerm" placeholder="Title, user or notes..." class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-1 d-flex gap-1">
+            <button type="submit" class="btn btn-sm btn-primary flex-fill" title="Filter">
+                <i class="bi bi-funnel"></i>
+            </button>
+            <a href="@Url.Action("AllExpenses", "Admin")" class="btn btn-sm btn-outline-secondary" title="Reset">
+                <i class="bi bi-arrow-counterclockwise"></i>
+            </a>
+        </div>
+    }
+</div>
+
+<!-- All Expenses Table -->
+<div class="card card-custom overflow-hidden">
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th style="width: 120px;">Date</th>
+                        <th>User Account</th>
+                        <th>Item & Description</th>
+                        <th>Category</th>
+                        <th>Payment Method</th>
+                        <th class="text-end">Amount</th>
+                        <th class="text-center" style="width: 100px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="small text-muted text-nowrap">
+                                <i class="bi bi-calendar3 me-1"></i> @item.ExpenseDate.ToString("MMM dd, yyyy")
+                            </td>
+                            <td>
+                                <div class="fw-bold text-dark">@item.UserFullName</div>
+                                <small class="text-muted">@item.UserEmail</small>
+                            </td>
+                            <td>
+                                <div class="fw-semibold">@item.Title</div>
+                                @if (!string.IsNullOrEmpty(item.Notes))
+                                {
+                                    <small class="text-muted text-truncate d-inline-block" style="max-width: 250px;">@item.Notes</small>
+                                }
+                            </td>
+                            <td>
+                                <span class="badge-category" style="background-color: @item.CategoryColor; color: white;">
+                                    <i class="bi @item.CategoryIcon"></i> @item.CategoryName
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border">@item.PaymentMethod</span>
+                            </td>
+                            <td class="text-end fw-bold text-danger fs-6 text-nowrap">
+                                ₹@item.Amount.ToString("N2")
+                            </td>
+                            <td class="text-center">
+                                @using (Html.BeginForm("DeleteExpense", "Admin", new { id = item.ExpenseId }, FormMethod.Post, new { onsubmit = "return confirm('Remove this transaction record from system database?');" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger py-1 px-2" title="Delete record">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <i class="bi bi-inbox fs-1 text-muted opacity-50"></i>
+            <h5 class="fw-bold mt-3 mb-1">No transactions found</h5>
+            <p class="text-muted small">No records match the current filter criteria.</p>
+        </div>
+    }
+</div>

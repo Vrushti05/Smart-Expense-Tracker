@@ -1,0 +1,103 @@
+@model IEnumerable<Expense_Tracker.Models.User>
+@{
+    ViewBag.Title = "User Management - Admin";
+}
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <div class="d-flex align-items-center gap-2">
+            <a href="@Url.Action("Index", "Admin")" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <h2 class="fw-bold mb-0">User Accounts Directory</h2>
+        </div>
+        <p class="text-muted mb-0 small">Administer client roles, oversee access credentials, and audit spending accounts</p>
+    </div>
+    <div>
+        <a href="@Url.Action("AllExpenses", "Admin")" class="btn btn-primary-custom">
+            <i class="bi bi-list-check me-1"></i> Audit Transactions
+        </a>
+    </div>
+</div>
+
+<div class="card card-custom overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>User Details</th>
+                    <th>Role</th>
+                    <th>Monthly Income</th>
+                    <th>Total Logged Expenses</th>
+                    <th>Total Spent</th>
+                    <th>Registered On</th>
+                    <th class="text-center" style="width: 180px;">Role Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in Model)
+                {
+                    <tr>
+                        <td class="text-muted fw-bold">#@u.UserId</td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="rounded-circle text-white d-flex align-items-center justify-content-center" 
+                                     style="width: 38px; height: 38px; font-weight: 700; background: @(u.IsAdmin ? "#ef4444" : "#4f46e5");">
+                                    @u.FullName.Substring(0, 1).ToUpper()
+                                </div>
+                                <div>
+                                    <div class="fw-bold text-dark">@u.FullName</div>
+                                    <small class="text-muted">@u.Email</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge @(u.IsAdmin ? "bg-danger" : "bg-primary") rounded-pill px-3 py-1">
+                                @u.Role
+                            </span>
+                        </td>
+                        <td class="fw-semibold">₹@u.MonthlyIncome.ToString("N2")</td>
+                        <td>
+                            <span class="badge bg-light text-dark border">
+                                @u.TotalExpenseRecords records
+                            </span>
+                        </td>
+                        <td class="fw-bold text-danger">₹@u.TotalSpentAmount.ToString("N2")</td>
+                        <td class="small text-muted">@u.CreatedAt.ToString("MMM dd, yyyy")</td>
+                        <td class="text-center">
+                            @if (u.UserId != ((Expense_Tracker.Models.User)Session[Expense_Tracker.Controllers.BaseController.SessionUserKey]).UserId)
+                            {
+                                <div class="d-inline-flex gap-1">
+                                    @using (Html.BeginForm("ChangeRole", "Admin", FormMethod.Post, new { @class = "d-inline" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="userId" value="@u.UserId" />
+                                        <input type="hidden" name="role" value="@(u.IsAdmin ? "Client" : "Admin")" />
+                                        <button type="submit" class="btn btn-sm @(u.IsAdmin ? "btn-outline-secondary" : "btn-outline-warning") py-1 px-2" 
+                                                title="Toggle Role">
+                                            <i class="bi bi-shield-shaded me-1"></i> Make @(u.IsAdmin ? "Client" : "Admin")
+                                        </button>
+                                    }
+
+                                    @using (Html.BeginForm("DeleteUser", "Admin", FormMethod.Post, new { @class = "d-inline", onsubmit = "return confirm('Are you sure you want to delete this user and all their expenses?');" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="userId" value="@u.UserId" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger py-1 px-2" title="Delete User">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary-subtle text-secondary small">Current Session</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
